@@ -1,0 +1,21 @@
+SCE Backlog:
+
+I want to see game board (console text mode) with pieces in initial position
+--I want to see 8x8 game board
+--I want to see title of each axis with chars and digits with respect to classical rules
+--I want to see 32 pieces: 16 black and 16 white at their places
+I want to move pieces (console interactive text mode) with respect to game rules
+--I want just to move pieces
+--I want pawns' movements (including en passant and promotion rule) checked to satisfy game rules
+--I want knights' movements checked to satisfy game rules
+--I want rooks' movements checked to satisfy game rules
+--I want bishops' movements checked to satisfy game rules
+--I want queen's movements checked to satisfy game rules
+--I want king's movements (including castling, check and mate) checked to satisfy game rules
+I want to play chess with another human or with myself using the board
+I want to play chess with basic (no depth) computer AI
+I want to play chess with advanced (deep depth thinking) computer AI
+I want to play chess using web interface, html5, canvas 2d, css3
+I want the game server to scale up by effectively using all CPU cores of available hardware
+I want the game server to scale out by occupying all the the computers in the given network
+
