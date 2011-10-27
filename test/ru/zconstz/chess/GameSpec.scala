@@ -1,10 +1,8 @@
 package ru.zconstz.chess
 
 import org.specs._
-import ru.zconstz.chess.Position.piecesToMap
-import ru.zconstz.chess.Piece.str2Location
 import ru.zconstz.chess.PieceColor.char2PieceColor
-
+import ru.zconstz.chess.Piece.{Movement, Location, str2Location}
 
 class GameSpec extends Specification {
 
@@ -36,53 +34,54 @@ class GameSpec extends Specification {
     }) must be(true)
   }
 
-  "fool's mate game" in {
-    //when("fool's mate game is played")
-    val whiteMovementsGen = new PredefinedMovementGenerator(List(("f2", "f3"), ("g2", "g4")))
-    val blackMovementsGen = new PredefinedMovementGenerator(List(("e7", "e5"), ("d8", "h4")))
-    val finalPosition = Game.play(
-      (whiteMovementsGen)(_),
-      (blackMovementsGen)(_))
-    //then("mate is registered by the engine")
-    //println(finalPosition.toString)
-    //println()
-    //println(FoolsMateFinalPosition.toString)
-    finalPosition.toString must equalTo(FoolsMateFinalPosition.toString)
-    finalPosition.isCheck must be(true)
-    finalPosition.isMate must be(true)
-  }
+//  "fool's mate game" in {
+//    //when("fool's mate game is played")
+//    val whiteMovementsGen = new PredefinedMovementGenerator(List(("f2", "f3"), ("g2", "g4")))
+//    val blackMovementsGen = new PredefinedMovementGenerator(List(("e7", "e5"), ("d8", "h4")))
+//    val finalPosition = Game.play(
+//      (whiteMovementsGen)(_),
+//      (blackMovementsGen)(_))
+//    //then("mate is registered by the engine")
+//    //println(finalPosition.toString)
+//    //println()
+//    //println(FoolsMateFinalPosition.toString)
+//    finalPosition.toString must equalTo(FoolsMateFinalPosition.toString())
+//    finalPosition.isCheck must be(true)
+//    finalPosition.isMate must be(true)
+//  }
 
   "figures are set up according to classical rules" in {
     //when("game is ready to be played")
     val position = InitialPosition
     //then("all figures of both color are in right places")
     ('a' to 'h').map(column => {
-      (position(column, 2).get match {
-        case Pawn(_, PieceColor.White) => true
-      }) && (position(column, 7).get match {
-        case Pawn(_, PieceColor.Black) => true
+      (position(Location(column, 2)).get match {
+        case Pawn(PieceColor.White) => true
+      }) && (position(Location(column, 7)).get match {
+        case Pawn(PieceColor.Black) => true
       })
     }).reduce(_ && _) must be(true)
 
-    ('a' to 'h').map(column => (column, position(column, 1).get, position(column, 8).get)).map {
+    ('a' to 'h').map(column => (column, position(Location(column, 1)).get, position(Location(column, 8)).get)).map {
       posFigure =>
         posFigure match {
-          case ('a', Rook(_, PieceColor.White), Rook(_, PieceColor.Black)) => true
-          case ('b', Knight(_, PieceColor.White), Knight(_, PieceColor.Black)) => true
-          case ('c', Bishop(_, PieceColor.White), Bishop(_, PieceColor.Black)) => true
-          case ('d', Queen(_, PieceColor.White), Queen(_, PieceColor.Black)) => true
-          case ('e', King(_, PieceColor.White), King(_, PieceColor.Black)) => true
-          case ('f', Bishop(_, PieceColor.White), Bishop(_, PieceColor.Black)) => true
-          case ('g', Knight(_, PieceColor.White), Knight(_, PieceColor.Black)) => true
-          case ('h', Rook(_, PieceColor.White), Rook(_, PieceColor.Black)) => true
+          case ('a', Rook(PieceColor.White), Rook(PieceColor.Black)) => true
+          case ('b', Knight(PieceColor.White), Knight(PieceColor.Black)) => true
+          case ('c', Bishop(PieceColor.White), Bishop(PieceColor.Black)) => true
+          case ('d', Queen(PieceColor.White), Queen(PieceColor.Black)) => true
+          case ('e', King(PieceColor.White), King(PieceColor.Black)) => true
+          case ('f', Bishop(PieceColor.White), Bishop(PieceColor.Black)) => true
+          case ('g', Knight(PieceColor.White), Knight(PieceColor.Black)) => true
+          case ('h', Rook(PieceColor.White), Rook(PieceColor.Black)) => true
           case _ => fail()
         }
     }.reduce(_ && _) must be(true)
   }
 }
 
+import ru.zconstz.chess.Piece.str2Location
 case class MatePosition(override val previousPosition: Position, color: PieceColor.PieceColor,
-                        turnNumber: Int) extends NextPosition(previousPosition, (('e', 2), ('e', 4))) {
+                        turnNumber: Int) extends NextPosition(previousPosition, Movement("e2", "e4")) {
   override def isMate = true
 }
 

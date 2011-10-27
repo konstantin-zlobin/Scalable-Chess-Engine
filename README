@@ -5,9 +5,9 @@ Legend:
 * - in progress
 + - completed
 
-[!] I want to see game board (console text mode) with pieces in initial position
-[*] -I want to see 8x8 game board
-[!] -I want to see title of each axis with chars and digits with respect to classical rules
+[+] I want to see game board (console text mode) with pieces in initial position
+[+] -I want to see 8x8 game board
+[+] -I want to see title of each axis with chars and digits with respect to classical rules
 [+] -I want to see 32 pieces: 16 black and 16 white at their places
 [!] I want to move pieces (console interactive text mode) with respect to game rules
 [+] -I want just to move pieces

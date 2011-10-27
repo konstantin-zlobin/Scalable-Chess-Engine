@@ -1,4 +1,6 @@
-package ru.zconstz.chess
+package ru.zconstz.chess.ui.console
+
+import ru.zconstz.chess.Game
 
 /**
  * @author Konstantin Zlobin

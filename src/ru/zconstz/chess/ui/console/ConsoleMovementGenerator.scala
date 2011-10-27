@@ -1,4 +1,7 @@
-package ru.zconstz.chess
+package ru.zconstz.chess.ui.console
+
+import ru.zconstz.chess.{NextPosition, Position, Piece}
+import ru.zconstz.chess.Piece.str2Location
 
 /**
  * @author Konstantin Zlobin
@@ -6,11 +9,9 @@ package ru.zconstz.chess
 
 class ConsoleMovementGenerator(val movementValidator: (Position, Piece.Movement) => Boolean) extends {
 
-  import ru.zconstz.chess.Piece.str2Location
-
   def apply(position: Position): Option[Position] = {
     println("here is position: ")
-    println(position.toString)
+    println(position.toString())
     var userMovement: Piece.Movement = null
     do {
       userMovement = readUserInput() match {
